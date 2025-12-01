@@ -236,7 +236,7 @@ For the file or feature you are working on:
 
 Example:
 
-```
+```text
 Task:
 - Analyze and improve this file.
 
@@ -246,10 +246,10 @@ Please:
 3. Suggest a small change plan with 3 - 5 steps.
 
 File: src/merkle/build_identity_merkle_tree.py
+```
 
 ```python
 [PASTE FILE CONTENT HERE]
-```
 ```
 
 Once the plan looks good, ask for concrete code.
@@ -269,10 +269,13 @@ Requirements:
 - Use short English comments where it improves readability.
 
 File: src/merkle/build_identity_merkle_tree.py
+```
 
 Diff example:
 
+```text
 Now give me a unified diff against the current version.
+```
 
 Format:
 
@@ -280,6 +283,7 @@ Format:
 @@ ...
 - old line
 + new line
+```
 
 Only include changed parts.
 
