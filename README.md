@@ -394,56 +394,52 @@ Apply the revised doc text via Codex and commit.
 
 ### Step 8 - Refresh `repo_context.md` periodically
 
-After a set of changes:
+After a set of changes, keep the shared context in sync:
 
 1. Commit and push your work.
-2. Re run `python flatten_repo_to_md.py`.
-3. Use the new `repo_context.md` for the next bigger ChatGPT planning session.
+2. Re-run the flattening script:
 
-This keeps ChatGPT's mental map aligned with your real repo.
+   ```bash
+   python flatten_repo_to_md.py
+   ```
+
+3. Use the updated `repo_context.md` in the next larger ChatGPT planning session.
+
+This keeps ChatGPT's mental map aligned with the real repository state.
 
 
 ## 4. When to use which OpenAI capability
 
 ### 4.1 ChatGPT 5.1 Thinking
 
-Use 5.1 Thinking mode when:
+Best for deep reasoning and collaborative design:
 
-- You need deep reasoning about your code and architecture.
-- You want to discuss tradeoffs and design options.
-- You want ChatGPT to keep a lot of context in working memory.
-- You are doing step by step "vibe coding" in a chat window.
-- You want ChatGPT to also generate Codex prompts that apply its suggested changes.
+- Keep large context in working memory while discussing architecture and trade-offs.
+- Do step-by-step "vibe coding" in chat.
+- Have ChatGPT generate Codex prompts that implement the proposed changes.
 
-This is the main mode for this workflow.
+This is the primary mode for this workflow.
 
 
 ### 4.2 Deep Research
 
-Use Deep Research when:
+Use when you need outward-looking, long-form research:
 
-- You need to look outward, beyond your repo.
-- You want long form web research about protocols, standards, or best practices.
-- You want comparisons between different approaches or tools in the ecosystem.
+- Protocols, standards, and best practices.
+- Comparisons between tools or approaches in the ecosystem.
 
-You can then bring the conclusions back into your 5.1 Thinking session and adapt them to your own codebase.
+Summarize the findings back into a 5.1 Thinking session to adapt them to your codebase.
 
 
 ### 4.3 OpenAI API
 
-Even if the owner of this repo prefers to work without the API, others might want to scale this pattern.
+Helpful when you want to automate or scale the workflow:
 
-The API becomes useful when you want to:
-
-- Automate `repo_context.md` generation and feeding into models.
-- Build CLI tools that call ChatGPT or Codex as part of your normal workflows.
+- Generate and feed `repo_context.md` automatically.
+- Build CLI tools that call ChatGPT or Codex.
 - Integrate coding suggestions into CI pipelines or bots.
 
-The core ideas stay the same:
-
-- Use models that are good at reasoning and planning for "thinking".
-- Use models that are good at precise code editing for "doing".
-- Use GitHub and your local shell for running, testing, and committing real changes.
+Principles stay the same: use reasoning-oriented models for planning, precision models for editing, and GitHub plus your shell as the operational backbone.
 
 
 ## 5. Summary
