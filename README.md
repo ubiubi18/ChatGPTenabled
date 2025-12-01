@@ -119,7 +119,6 @@ This file can be used as a "snapshot context" that you paste into ChatGPT so it 
 
 This gives you a single, self contained Markdown document you can feed into ChatGPT 5.1 Thinking mode.
 
-
 ### 2.2 How to run it
 
 Clone or update your repo normally, then run the script locally.
@@ -138,75 +137,66 @@ python flatten_repo_to_md.py
 
 # you should now have:
 # repo_context.md
+```
 
 You can also pass a custom root path:
 
+```bash
 python flatten_repo_to_md.py path/to/your/repo
+```
 
 After every bigger set of applied changes (for example, after a coding session where Codex updated multiple files), you can:
 
-    Pull the latest state from GitHub or use your local working copy.
-
-    Run python flatten_repo_to_md.py again.
-
-    Use the new repo_context.md as the context for your next ChatGPT session.
+1. Pull the latest state from GitHub or use your local working copy.
+2. Run `python flatten_repo_to_md.py` again.
+3. Use the new `repo_context.md` as the context for your next ChatGPT session.
 
 This keeps your ChatGPT context in sync with the real codebase.
-2.3 What is included by default
+
+### 2.3 What is included by default
 
 The script includes files with these extensions:
 
-    .py, .js, .ts, .tsx, .jsx
-
-    .go, .rs, .sol
-
-    .md, .txt
-
-    .json, .yml, .yaml, .toml
-
-    .sh, .bash
-
-    .html, .css
+- `.py`, `.js`, `.ts`, `.tsx`, `.jsx`
+- `.go`, `.rs`, `.sol`
+- `.md`, `.txt`
+- `.json`, `.yml`, `.yaml`, `.toml`
+- `.sh`, `.bash`
+- `.html`, `.css`
 
 Directories skipped by default:
 
-    .git, .idea, .vscode
-
-    node_modules, dist, build
-
-    __pycache__
+- `.git`, `.idea`, `.vscode`
+- `node_modules`, `dist`, `build`
+- `__pycache__`
 
 You can adjust these lists in the script if your stack is different.
-3. Vibe coding workflow step by step
+
+## 3. Vibe coding workflow step by step
 
 This is a reproducible pattern you can adapt.
-Step 0 - Prepare a context snapshot
 
-    Update your repo or ensure your local copy is current.
+### Step 0 - Prepare a context snapshot
 
-    Run python flatten_repo_to_md.py in the repo root.
-
-    Open repo_context.md in an editor and keep it ready for copy paste.
+- Update your repo or ensure your local copy is current.
+- Run `python flatten_repo_to_md.py` in the repo root.
+- Open `repo_context.md` in an editor and keep it ready for copy paste.
 
 You now have a single file that describes your project structure and code.
-Step 1 - Start a new ChatGPT session (5.1 Thinking)
+### Step 1 - Start a new ChatGPT session (5.1 Thinking)
 
 In a new ChatGPT 5.1 Thinking chat:
 
-    Briefly describe the project and your goal for this session in your own words (3 to 10 sentences).
-
-    Paste the contents of repo_context.md (or a large subset if the file is very big).
-
-    Ask ChatGPT to:
-
-        Summarize the project.
-
-        Identify the main components.
-
-        Suggest a short list of high impact tasks or improvements.
+- Briefly describe the project and your goal for this session in your own words (3 to 10 sentences).
+- Paste the contents of `repo_context.md` (or a large subset if the file is very big).
+- Ask ChatGPT to:
+  - Summarize the project.
+  - Identify the main components.
+  - Suggest a short list of high impact tasks or improvements.
 
 Example first prompt:
 
+```
 You are my pair programmer and architecture coach.
 
 Goal for this session:
@@ -220,38 +210,33 @@ Please:
 
 Here is the repo_context.md snapshot:
 [PASTE CONTENTS OF repo_context.md HERE]
+```
 
-Step 2 - Pick a single focused task
+### Step 2 - Pick a single focused task
 
 From the list of suggested tasks or from your own priorities, choose one focus:
 
-    Improve a specific module.
-
-    Implement a feature.
-
-    Fix a bug.
-
-    Clean up a config or pipeline.
-
-    Update documentation.
+- Improve a specific module.
+- Implement a feature.
+- Fix a bug.
+- Clean up a config or pipeline.
+- Update documentation.
 
 Keep one session block focused on one main unit: one file, one feature, or one doc section.
-Step 3 - Ask ChatGPT to think before coding
+
+### Step 3 - Ask ChatGPT to think before coding
 
 For the file or feature you are working on:
 
-    Paste only the relevant file or a smaller code section (not always the whole repo_context.md again).
-
-    Ask ChatGPT for:
-
-        A short summary of what the code does.
-
-        A list of potential problems or missing cases.
-
-        A small plan in 3 to 5 steps.
+- Paste only the relevant file or a smaller code section (not always the whole `repo_context.md` again).
+- Ask ChatGPT for:
+  - A short summary of what the code does.
+  - A list of potential problems or missing cases.
+  - A small plan in 3 to 5 steps.
 
 Example:
 
+```
 Task:
 - Analyze and improve this file.
 
@@ -264,7 +249,8 @@ File: src/merkle/build_identity_merkle_tree.py
 
 ```python
 [PASTE FILE CONTENT HERE]
-
+```
+```
 
 Once the plan looks good, ask for concrete code.
 
@@ -316,7 +302,7 @@ Requirements:
 - It should not modify any unrelated files.
 - It should include the new file content or diff inline.
 
-    ChatGPT responds with something like:
+ChatGPT responds with something like:
 
 You are editing the repository "yourrepo".
 
@@ -324,9 +310,10 @@ You are editing the repository "yourrepo".
 
 ```python
 [NEW CODE HERE]
+```
 
-    Do not modify any other files.
-
+Do not modify any other files.
+```
 
 3. You copy this Codex prompt and paste it into Codex while your working directory is the repo root.
 4. Codex applies the changes exactly as described.
@@ -343,14 +330,13 @@ pytest
 python scripts/run_lab.py
 bitcoin-cli -regtest getblockcount
 curl http://localhost:port/health
+```
 
 If something fails, bring back:
 
-    The command you ran.
-
-    The error output or traceback.
-
-    The relevant code snippet.
+- The command you ran.
+- The error output or traceback.
+- The relevant code snippet.
 
 and ask ChatGPT to help debug:
 
@@ -359,6 +345,7 @@ I applied your changes and got this error when running:
 ```bash
 [command]
 [error output]
+```
 
 Relevant code:
 
@@ -366,11 +353,9 @@ Relevant code:
 
 Please:
 
-    Explain what is going wrong.
-
-    Suggest a minimal fix.
-
-    Provide the updated version of the affected function.
+- Explain what is going wrong.
+- Suggest a minimal fix.
+- Provide the updated version of the affected function.
 
 
 
@@ -394,6 +379,10 @@ Here is the current section in docs/pipeline.md:
 
 Please rewrite this section to match the new implementation.
 Keep it concise and practical. Output only the new section.
+
+```
+
+```
 
 
 Apply the revised doc text via Codex and commit.
