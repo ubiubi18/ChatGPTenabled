@@ -405,7 +405,7 @@ After a set of changes, keep the shared context in sync:
 
 3. Use the updated `repo_context.md` in the next larger ChatGPT planning session.
 
-This keeps ChatGPT's mental map aligned with the real repository state.
+> This keeps ChatGPT's mental map aligned with the real repository state.
 
 
 ## 4. When to use which OpenAI capability
